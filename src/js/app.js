@@ -1,3 +1,4 @@
+import { left } from "@popperjs/core";
 import "../style/index.css";
 
 /**
@@ -29,19 +30,69 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  let socialMedia = `<ul class="position-left">
+    <li><a href="
+              ${
+                variables.twitter != null
+                  ? "https://twitter.com/" + variables.twitter
+                  : "https://twitter.com/4GeeksAcademyES"
+              }" ><i class="fab fa-twitter"></i></a></li>
+    <li><a href="
+              ${
+                variables.github != null
+                  ? "https://github.com/" + variables.github
+                  : "https://github.com/4GeeksAcademy"
+              }"><i class="fab fa-github"></i></a></li>
+    <li><a href="
+              ${
+                variables.linkedin != null
+                  ? "https://www.linkedin.com/in/" + variables.linkedin
+                  : "https://www.linkedin.com/school/4geeks-academy-vzla/?originalSubdomain=ve"
+              }"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="
+              ${
+                variables.instagram != null
+                  ? "https://www.instagram.com/" + variables.instagram
+                  : "https://www.instagram.com/4geeksacademyve/?hl=es"
+              }" ><i class="fab fa-instagram"></i></a></li>
+  </ul>`;
+
+  if (variables.socialMediaPosition !== "position-left")
+    socialMedia = `<ul class="position-right">
+    <li><a href="
+              ${
+                variables.twitter != null
+                  ? "https://twitter.com/" + variables.twitter
+                  : "https://twitter.com/4GeeksAcademyES"
+              }" ><i class="fab fa-twitter"></i></a></li>
+    <li><a href="
+              ${
+                variables.github != null
+                  ? "https://github.com/" + variables.github
+                  : "https://github.com/4GeeksAcademy"
+              }"><i class="fab fa-github"></i></a></li>
+    <li><a href="
+              ${
+                variables.linkedin != null
+                  ? "https://www.linkedin.com/in/" + variables.linkedin
+                  : "https://www.linkedin.com/school/4geeks-academy-vzla/?originalSubdomain=ve"
+              }"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="
+              ${
+                variables.instagram != null
+                  ? "https://www.instagram.com/" + variables.instagram
+                  : "https://www.instagram.com/4geeksacademyve/?hl=es"
+              }" ><i class="fab fa-instagram"></i></a></li>
+  </ul>`;
+
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
-          </ul>
+          <h1>${variables.name} ${variables.lastname}</h1>
+          <h2>${variables.role}</h2>
+          <h3>${variables.city}, ${variables.country}</h3>
+          ${socialMedia}
         </div>
     `;
 }
@@ -64,11 +115,11 @@ window.onload = function() {
     github: "alesanchezr",
     linkedin: null,
     instagram: null,
-    name: null,
-    lastname: null,
-    role: null,
-    country: null,
-    city: null
+    name: "Your Name",
+    lastname: "Your Lastname",
+    role: "Your Role",
+    country: "Your Country",
+    city: "Your City"
   };
   render(window.variables); //render the card for the first time
 
